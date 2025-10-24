@@ -25,7 +25,7 @@ spring:
         - id: visits-service
           uri: lb://visits-service
           predicates:
-            - Path=/api/visit/**
+            - Path=/api/visits/**
           filters:
             - StripPrefix=2
         - id: customers-service

@@ -13,6 +13,9 @@ services:
       retries: 10
     ports:
      - 8888:8888
+    networks:
+     - petclinic-net
+
 
   discovery-server:
     image: springcommunity/spring-petclinic-discovery-server
@@ -31,6 +34,9 @@ services:
         condition: service_healthy
     ports:
      - 8761:8761
+    networks:
+     - petclinic-net
+
 
   customers-service:
     image: springcommunity/spring-petclinic-customers-service
@@ -46,6 +52,9 @@ services:
         condition: service_healthy
     ports:
     - 8081:8081
+    networks:
+    - petclinic-net
+
 
   visits-service:
     image: springcommunity/spring-petclinic-visits-service
@@ -61,6 +70,9 @@ services:
         condition: service_healthy
     ports:
      - 8082:8082
+    networks:
+    - petclinic-net
+
 
   vets-service:
     image: springcommunity/spring-petclinic-vets-service
@@ -76,6 +88,9 @@ services:
         condition: service_healthy
     ports:
      - 8083:8083
+    networks:
+    - petclinic-net
+
 
 
   genai-service:
@@ -96,6 +111,9 @@ services:
         condition: service_healthy
     ports:
      - 8084:8084
+    networks:
+    - petclinic-net
+
 
 
   api-gateway:
@@ -110,8 +128,13 @@ services:
         condition: service_healthy
       discovery-server:
         condition: service_healthy
+    environment:
+      - SPRING_ZIPKIN_ENABLED=false
+      - SPRING_SLEUTH_ENABLED=false
     ports:
      - 8080:8080
+    networks:
+    - petclinic-net
 
   tracing-server:
     image: openzipkin/zipkin
@@ -122,6 +145,9 @@ services:
           memory: 512M
     ports:
      - 9411:9411
+    networks:
+    - petclinic-net
+
 
   admin-server:
     image: springcommunity/spring-petclinic-admin-server
@@ -137,6 +163,9 @@ services:
         condition: service_healthy
     ports:
      - 9090:9090
+    networks:
+    - petclinic-net
+
 
   ## Grafana / Prometheus
 
@@ -149,6 +178,9 @@ services:
           memory: 256M
     ports:
     - 3030:3030
+    networks:
+    - petclinic-net
+
 
   prometheus-server:
     build: ./docker/prometheus
@@ -159,3 +191,9 @@ services:
           memory: 256M
     ports:
     - 9091:9090
+    networks:
+    - petclinic-net
+
+networks:
+  petclinic-net:
+    driver: bridge
