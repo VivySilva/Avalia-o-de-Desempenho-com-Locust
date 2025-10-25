@@ -1,2 +1,1 @@
 Method,Name,Error,Occurrences
-GET,/api/customer/owners,HTTPError('405 Client Error: Method Not Allowed for url: /api/customer/owners'),1
