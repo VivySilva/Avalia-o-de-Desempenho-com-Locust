@@ -77,16 +77,6 @@ cd <diretorio-testes>
 pip install -r requirements.txt
 ```
 
-**Arquivo `requirements.txt`:**
-```
-locust>=2.15.0
-pandas>=2.0.0
-numpy>=1.24.0
-matplotlib>=3.7.0
-seaborn>=0.12.0
-openpyxl>=3.1.0
-```
-
 ## ⚙️ Configuração do Sistema
 
 ### Passo 1: Subir o Spring PetClinic
@@ -117,55 +107,13 @@ Invoke-WebRequest -Uri "http://localhost:8080/api/customer/owners" -Method GET
 curl http://localhost:8080/api/customer/owners
 ```
 
-### Passo 3: Popular o Banco de Dados
-
-O Spring PetClinic já vem com dados iniciais, mas você pode adicionar mais:
-
-**Script `popular_banco.py`:**
-
-```python
-import requests
-import random
-
-BASE_URL = "http://localhost:8080"
-
-# Gerar 100 donos de exemplo
-for i in range(1, 101):
-    owner = {
-        "firstName": f"TestOwner{i}",
-        "lastName": f"LastName{i}",
-        "address": f"Rua Teste {i}",
-        "city": random.choice(["Picos", "São Paulo", "Rio de Janeiro", "Brasília"]),
-        "telephone": f"88{random.randint(10000000, 99999999)}"
-    }
-    
-    response = requests.post(f"{BASE_URL}/api/customer/owners", json=owner)
-    if response.status_code == 201:
-        print(f"✓ Dono {i} criado")
-    else:
-        print(f"✗ Erro ao criar dono {i}: {response.status_code}")
-
-print("\n✓ Banco de dados populado!")
-```
-
-Execute:
-```bash
-python popular_banco.py
-```
-
 ## 🧪 Execução dos Testes
 
 ### Opção 1: Executar Todos os Cenários (Recomendado)
 
 **Windows:**
 ```powershell
-.\executar_todos.ps1
-```
-
-**Linux/Mac:**
-```bash
-chmod +x executar_todos.sh
-./executar_todos.sh
+.\executar.ps1
 ```
 
 **Com parâmetros personalizados:**
@@ -206,8 +154,8 @@ locust -f locustfile.py \
 
 - **Cenário LEVE**: 5 exec × 10 min = ~50 min
 - **Cenário MÉDIO**: 5 exec × 10 min = ~50 min  
-- **Cenário PICO**: 10 exec × 5 min = 25 min
-- **TOTAL**: ~12.5 horas + análise
+- **Cenário PICO**: 10 exec × 5 min = ~25 min
+- **TOTAL**: ~2.05 horas + análise
 
 **💡 Dica:** Execute overnight ou em lotes menores.
 
@@ -230,7 +178,7 @@ results/
 ├── LEVE_exec_1.html
 ├── ...
 ├── analise_consolidada.xlsx       # Relatório Excel
-└── graficos/
+└── graficos e imagens/
     ├── comparacao_cenarios.png    # Gráficos comparativos
     └── distribuicoes.png          # Box plots
 ```
@@ -309,12 +257,6 @@ projeto-teste-carga/
 - ⚠️ Possível aparecimento de erros
 - ⚠️ Identifica limites do sistema
 
-### Indicadores de Problemas
-
-- 🚨 Taxa de sucesso < 99%
-- 🚨 Tempo médio > 500ms
-- 🚨 Tempo máximo > 5000ms
-- 🚨 Variação alta (desvio padrão > 50% da média)
 
 ## 🎥 Vídeo Demonstrativo
 
@@ -337,91 +279,9 @@ O vídeo deve mostrar:
    - Docker stats mostrando CPU/memória
    - Logs da aplicação
 
-## 📝 Artigo IEEE (6 páginas)
-
-### Estrutura Sugerida
-
-**1. Resumo (Abstract)**
-- Contexto, objetivo, método, principais resultados
-
-**2. Introdução**
-- Importância dos testes de carga
-- Apresentação do Spring PetClinic
-- Objetivos do estudo
-
-**3. Metodologia**
-- Descrição da arquitetura testada
-- Configuração do ambiente
-- Cenários de teste (A, B, C)
-- Ferramentas utilizadas (Locust)
-
-**4. Resultados**
-- Tabelas com as 6 métricas por cenário
-- Gráficos comparativos
-- Análise estatística
-
-**5. Discussão**
-- Interpretação dos resultados
-- Comportamento sob diferentes cargas
-- Identificação de gargalos
-- Comparação com benchmarks (se disponível)
-
-**6. Conclusões**
-- Principais descobertas
-- Limitações do estudo
-- Trabalhos futuros
-
-**7. Referências**
-- Spring PetClinic
-- Documentação Locust
-- Artigos sobre performance testing
-
-## ⚠️ Troubleshooting
-
-### Problema: "Locust não encontrado"
-```bash
-pip install locust
-# ou
-pip install --upgrade locust
-```
-
-### Problema: "Connection refused"
-- Verifique se o Docker está rodando: `docker ps`
-- Aguarde a aplicação inicializar completamente (~2-3 min)
-- Teste manualmente: `curl http://localhost:8080/api/customer/owners`
-
-### Problema: "Port 8080 already in use"
-```bash
-# Pare outros serviços na porta 8080
-docker-compose down
-# ou altere a porta no docker-compose.yml
-```
-
-### Problema: "Muitos erros nos testes"
-- Verifique recursos da máquina (CPU/RAM)
-- Reduza número de usuários temporariamente
-- Aumente timeout das requisições no Locust
-- Verifique logs: `docker-compose logs -f`
-
-### Problema: "Script PowerShell não executa"
-```powershell
-Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
-```
-
-## 📧 Contato e Suporte
-
-Para dúvidas sobre este projeto:
-- Abra uma issue no repositório
-- Consulte a documentação oficial do Locust: https://docs.locust.io
-
-## 📄 Licença
-
-Este projeto de teste é fornecido como está para fins educacionais.
-
----
 
 **Desenvolvido para avaliação de desempenho do Spring PetClinic Microservices**
 
 **Data:** Outubro 2025  
 **Ferramenta:** Locust  
-**Metodologia:** 30 repetições por cenário com análise estatística
+**Metodologia:** 5 repetições por cenário com análise estatística

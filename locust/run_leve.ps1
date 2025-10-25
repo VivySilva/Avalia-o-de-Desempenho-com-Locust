@@ -26,7 +26,7 @@ Write-Host "  - Usuarios: 50"
 Write-Host "  - Spawn Rate: 5 usuarios/s"
 Write-Host "  - Duracao: 10 minutos"
 Write-Host "  - Repeticoes: $Repetitions"
-Write-Host "  - Host (Alvo): $BaseUrl" # <-- CORRIGIDO
+Write-Host "  - Host (Alvo): $BaseUrl" 
 Write-Host "  - Aquecimento: 1 minuto (desconsiderado na analise)"
 Write-Host "==========================================" -ForegroundColor Cyan
 Write-Host ""
@@ -38,7 +38,6 @@ for ($i = 1; $i -le $Repetitions; $i++) {
     Write-Host "Execucao $i/$Repetitions do cenario LEVE"
     Write-Host "==============================" -ForegroundColor Yellow
 
-    # -- MELHORIA: Usar Join-Path para construir caminhos de forma segura --
     $csvPrefix = Join-Path $resultsDir "LEVE_exec_$i"
     $htmlReport = Join-Path $resultsDir "LEVE_exec_$i.html"
 
@@ -50,7 +49,7 @@ for ($i = 1; $i -le $Repetitions; $i++) {
             -t 10m `
             --csv $csvPrefix `
             --html $htmlReport `
-            --host $BaseUrl # <-- CORRIGIDO
+            --host $BaseUrl 
 
         # $LASTEXITCODE armazena o codigo de saida do ultimo programa (locust)
         if ($LASTEXITCODE -eq 0) {
@@ -67,7 +66,7 @@ for ($i = 1; $i -le $Repetitions; $i++) {
     # Pausa entre execucoes
     if ($i -lt $Repetitions) {
         Write-Host "Aguardando 10 segundos antes da proxima execucao..."
-        Write-Host "------------------------------`n" # <-- CORRIGIDO (usar `n para nova linha)
+        Write-Host "------------------------------`n"
         Start-Sleep -Seconds 10
     }
 }
@@ -81,4 +80,4 @@ Write-Host "==========================================" -ForegroundColor Green
 Write-Host "Tempo total: $($elapsed.ToString('hh\:mm\:ss'))"
 # Locust cria arquivos como _stats.csv, _failures.csv, etc.
 Write-Host "Resultados salvos em: $resultsDir/LEVE_exec_*_stats.csv"
-Write-Host "==========================================`n" # <-- CORRIGIDO
+Write-Host "==========================================`n" # 

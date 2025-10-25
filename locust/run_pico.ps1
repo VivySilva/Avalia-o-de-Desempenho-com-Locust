@@ -4,14 +4,11 @@
 # ==========================
 
 param(
-    # [CORRIGIDO] Renomeado de '$Host' para '$BaseUrl' para evitar conflito
-    # com a variavel automatica $Host do PowerShell.
     [string]$BaseUrl = "http://localhost:8080",
     
     [int]$Repetitions = 5
 )
 
-# [MELHORIA] Usar '.\' e mais explicito para indicar o diretorio atual
 $resultsDir = ".\results"
 if (-not (Test-Path $resultsDir)) {
     New-Item -ItemType Directory -Path $resultsDir | Out-Null
@@ -38,7 +35,6 @@ for ($i = 1; $i -le $Repetitions; $i++) {
     Write-Host "Execucao $i/$Repetitions do cenario PICO"
     Write-Host "==============================" -ForegroundColor Yellow
 
-    # [MELHORIA] Usar Join-Path para construir caminhos de forma segura
     $csvPrefix = Join-Path $resultsDir "PICO_exec_$i"
     $htmlReport = Join-Path $resultsDir "PICO_exec_$i.html"
 

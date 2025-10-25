@@ -23,7 +23,7 @@ plt.style.use('seaborn-v0_8-darkgrid')
 sns.set_palette("husl")
 
 RESULTS_DIR = Path("results")
-GRAFICOS_DIR = RESULTS_DIR / "graficos"
+GRAFICOS_DIR = RESULTS_DIR / "graficos e imagens"
 GRAFICOS_DIR.mkdir(exist_ok=True)
 
 # Configurações dos cenários (com aquecimento)
@@ -43,7 +43,7 @@ def parse_duration_to_seconds(duration_str):
 
 def parse_stats_file(filepath, scenario_name):
     """
-    [CORRIGIDO] Le o arquivo _stats_history.csv do Locust,
+    Le o arquivo _stats_history.csv do Locust,
     descarta o aquecimento e extrai as métricas.
     """
     try:
@@ -52,7 +52,6 @@ def parse_stats_file(filepath, scenario_name):
             print(f"⚠ Arquivo vazio: {filepath}")
             return None
         
-        # [CORREÇÃO v4.0] O valor 'Aggregated' está na coluna 'Name', não 'Type'.
         df_agg = df[df['Name'] == 'Aggregated'].copy()
         
         if df_agg.empty:

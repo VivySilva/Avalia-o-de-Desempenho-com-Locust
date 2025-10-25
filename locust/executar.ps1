@@ -6,7 +6,6 @@
 param(
     [string]$BaseUrl = "http://localhost:8080",
     
-    # Mude o valor padrao aqui se quiser
     [int]$Repetitions = 5
 )
 
