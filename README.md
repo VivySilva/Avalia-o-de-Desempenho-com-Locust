@@ -249,29 +249,6 @@ projeto-teste-carga/
 - ⚠️ Possível aparecimento de erros
 - ⚠️ Identifica limites do sistema
 
-
-## 🎥 Vídeo Demonstrativo
-
-O vídeo deve mostrar:
-
-1. **Ambiente em execução**
-   - Docker Compose mostrando serviços ativos
-   - Comandos de verificação da aplicação
-
-2. **Execução de um teste**
-   - Rodar um cenário completo
-   - Mostrar console do Locust em ação
-
-3. **Análise dos resultados**
-   - Abrir Excel consolidado
-   - Navegar pelos gráficos gerados
-   - Destacar métricas principais
-
-4. **Monitoramento (opcional)**
-   - Docker stats mostrando CPU/memória
-   - Logs da aplicação
-
-
 **Desenvolvido para avaliação de desempenho do Spring PetClinic Microservices**
 
 **Data:** Outubro 2025  
