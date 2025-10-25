@@ -255,3 +255,5 @@ projeto-teste-carga/
 **Ferramenta:** Locust  
 **Metodologia:** 5 repetições por cenário com análise estatística
 
+**link video:** https://youtu.be/Ru67gmDR25w
+
