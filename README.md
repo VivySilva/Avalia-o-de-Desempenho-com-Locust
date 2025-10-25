@@ -285,3 +285,4 @@ O vídeo deve mostrar:
 **Data:** Outubro 2025  
 **Ferramenta:** Locust  
 **Metodologia:** 5 repetições por cenário com análise estatística
+
