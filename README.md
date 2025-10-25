@@ -63,15 +63,7 @@ git clone https://github.com/spring-petclinic/spring-petclinic-microservices.git
 cd spring-petclinic-microservices
 ```
 
-### 2. Clonar este Repositório de Testes
-
-```bash
-cd ..
-git clone <seu-repositorio-de-testes>
-cd <diretorio-testes>
-```
-
-### 3. Instalar Dependências Python
+### 2. Instalar Dependências Python
 
 ```bash
 pip install -r requirements.txt
